@@ -1,0 +1,8 @@
+## Interface: 16001
+## Title: BoarBeQuiet
+## Notes: Mutes the boar squeal and the boar and pig voice. Can play another sound when the boar pet uses Charge.
+## Author: Tucker Alleborn
+## Version: @project-version@
+## SavedVariables: BoarBeQuietDB
+
+Core.lua
