@@ -77,11 +77,11 @@ end
 --- Prints the state and the commands.
 local function printStatus()
     if ns.db.enabled then
-        print(addonName .. ": on. Boar and pig voices are muted.")
+        print(addonName .. ": on. All boar and pig voices are muted.")
     else
-        print(addonName .. ": off. Boar and pig voices play.")
+        print(addonName .. ": off. All boar and pig voices play.")
     end
-    print("  Commands: /bbq on, /bbq off")
+    print("  /bbq on mutes them all. /bbq off unmutes them all.")
 end
 
 local frame = CreateFrame("Frame")

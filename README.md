@@ -10,10 +10,13 @@ BoarBeQuiet is an addon for World of Warcraft: Forever. It mutes the boar squeal
 
 ## Commands
 
+The addon has one switch. It mutes all of the sounds above, or none of them.
+
 | Command | Result |
 |---|---|
 | `/bbq` | Shows the state and the commands. |
-| `/bbq on`, `/bbq off` | Turns the mute on or off. Off unmutes each file that the addon muted. |
+| `/bbq on` | Mutes all of the sounds. This is the default. |
+| `/bbq off` | Unmutes all of the sounds. |
 
 `/boarbequiet` is the long form of `/bbq`.
 
@@ -24,10 +27,20 @@ BoarBeQuiet is an addon for World of Warcraft: Forever. It mutes the boar squeal
 
 ## Future enhancements
 
-Version 1.0.0 had two more features. In a live test the first one did not work, so version 1.1.0 keeps only the main mute. The code of both is in the tag `v1.0.0`.
+Version 1.0.0 tried two more features. In a live test the Charge mute did not work, so version 1.1.0 keeps only the one switch. The code of both is in the tag `v1.0.0`. A later version can add them again:
 
-- **A mute for the sound of the boar's Charge.** `/bbq charge on` muted `sound/spells/challengingshout.ogg` (569236) and `sound/spells/taunt.ogg` (568268), the two files of SpellVisual 519. In the live test the Charge sound still played, so the sound comes from a file that is not on that list. Growl, Taunt, Challenging Shout, Demoralizing Shout and Roar, Battle Cry, Piercing Howl and Cower also play those two files. Thus a good mute needs a file that only Charge plays.
-- **A swap sound for the pet's Charge.** `/bbq swap <sound>` played a SoundKit ID, a `SOUNDKIT` name or a file when the player's own boar pet used Charge. The live test showed that an addon can see the pet's Charge: the addon saw 10 casts of rank 1 (7371), and it ignored Growl (14916). The game makes the cast data of other units secret, so a swap can work only for the player's own pet. The game has no API that replaces a sound file, so a true swap needs the Charge mute and a second sound.
+- **Muting specific sounds.** A setting for each sound, for example the sound of the boar's Charge, in addition to the main switch. Version 1.0.0 muted `sound/spells/challengingshout.ogg` (569236) and `sound/spells/taunt.ogg` (568268) for the Charge, the two files of SpellVisual 519. In the live test the Charge sound still played, so the sound comes from a different file. Growl, Taunt, Challenging Shout, Demoralizing Shout and Roar, Battle Cry, Piercing Howl and Cower also play those two files. Thus a good mute needs a file that only Charge plays.
+- **Replacement sounds.** Play a sound of the player's choice in place of a muted sound. Version 1.0.0 did this for the Charge of the player's own boar pet (`/bbq swap <sound>`). The live test showed that an addon can see the pet's Charge: the addon saw 10 casts of rank 1 (7371), and it ignored Growl (14916). The game makes the cast data of other units secret, so a replacement for a spell can work only for the player's own pet. The game has no API that replaces a sound file, so a replacement is always a mute plus a second sound.
+
+## Contributing
+
+Help is welcome, most of all with finding sound files. Both future enhancements need the FileDataID of each sound, and the Charge sound is the first one to find.
+
+1. Look for candidate files in the Forever client data, for example in the wago.tools DB2 tables in "Where the sound IDs come from".
+2. Test a file in the game. `/run MuteSoundFile(<FileDataID>)` mutes one file until the client restarts, and `/run UnmuteSoundFile(<FileDataID>)` unmutes it. If the sound stops, that is the file.
+3. Open an issue or a pull request with the FileDataID, the file path and the sound that it plays. Run `python tests/test_core.py` before a pull request.
+
+Code changes are welcome too. Please keep the main switch as the default behavior.
 
 ## Where the sound IDs come from
 
@@ -43,7 +56,7 @@ Run `python tests/test_core.py`. It needs `pip install lupa`, which embeds Lua 5
 
 ## Releases
 
-A tag starts a release, for example `git tag v1.1.0` and then `git push origin v1.1.0`. GitHub Actions runs the tests. Then the BigWigs packager builds the zip, puts the tag in `## Version`, and attaches the zip to a GitHub release. The zip does not include the `tests` folder.
+A tag starts a release, for example `git tag v1.2.0` and then `git push origin v1.2.0`. GitHub Actions runs the tests. Then the BigWigs packager builds the zip, puts the tag in `## Version`, and attaches the zip to a GitHub release. The zip does not include the `tests` folder.
 
 The packager also uploads the zip to CurseForge when both of these are in place:
 

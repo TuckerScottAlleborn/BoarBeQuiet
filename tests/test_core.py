@@ -171,11 +171,11 @@ class CommandTests(unittest.TestCase):
         a.command("off")
         self.assertFalse(a.db.enabled)
         self.assertEqual(sorted(a.unmuted), sorted(muted_at_load))
-        self.assertEqual(a.printed[-2], "BoarBeQuiet: off. Boar and pig voices play.")
+        self.assertEqual(a.printed[-2], "BoarBeQuiet: off. All boar and pig voices play.")
         a.command("on")
         self.assertTrue(a.db.enabled)
         self.assertEqual(len(a.muted), 2 * VOICE_COUNT)
-        self.assertEqual(a.printed[-2], "BoarBeQuiet: on. Boar and pig voices are muted.")
+        self.assertEqual(a.printed[-2], "BoarBeQuiet: on. All boar and pig voices are muted.")
 
     def test_on_while_on_changes_nothing(self):
         self.a.command("on")
@@ -195,8 +195,8 @@ class CommandTests(unittest.TestCase):
         a = self.a
         for text in ("", "nonsense"):
             a.command(text)
-            self.assertEqual(a.printed[-2:], ["BoarBeQuiet: on. Boar and pig voices are muted.",
-                                              "  Commands: /bbq on, /bbq off"])
+            self.assertEqual(a.printed[-2:], ["BoarBeQuiet: on. All boar and pig voices are muted.",
+                                              "  /bbq on mutes them all. /bbq off unmutes them all."])
 
     def test_commands_of_version_1_0_0_do_nothing(self):
         a = self.a

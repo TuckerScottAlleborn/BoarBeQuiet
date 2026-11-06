@@ -1,6 +1,6 @@
 ## Interface: 16001
 ## Title: BoarBeQuiet
-## Notes: Mutes the boar squeal and the boar and pig voice.
+## Notes: Mutes all boar and pig voices, including the squeal. One switch: /bbq on or /bbq off.
 ## Author: Tucker Alleborn
 ## Version: @project-version@
 ## X-License: MIT
