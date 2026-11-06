@@ -42,7 +42,16 @@ The IDs come from the client data of Forever build 1.60.1.70790, through the wag
 
 ## Tests
 
-Run `python tests/test_core.py`. It needs `pip install lupa`, which embeds Lua 5.1. The harness loads `Core.lua` with stubs for the game API, fires the events, and runs each command. A pass proves the logic. It does not prove the behavior in the game. Three broken copies of `Core.lua` made the harness fail, so the checks can catch a fault.
+Run `python tests/test_core.py`. It needs `pip install lupa`, which embeds Lua 5.1, the Lua version of the game. The 30 tests load `Core.lua` with stubs for the game API, fire the game events, and run each command. A pass proves the logic. It does not prove the behavior in the game. Four broken copies of `Core.lua` made the tests fail, so the tests can catch a fault. GitHub Actions runs the tests on each push.
+
+## Releases
+
+A tag starts a release, for example `git tag v1.0.0` and then `git push origin v1.0.0`. GitHub Actions runs the tests. Then the BigWigs packager builds the zip, puts the tag in `## Version`, and attaches the zip to a GitHub release. The zip does not include the `tests` folder.
+
+The packager also uploads the zip to CurseForge when both of these are in place:
+
+- The TOC has the line `## X-Curse-Project-ID: <id>`, with the ID of the CurseForge project.
+- The repository has a secret `CF_API_KEY` with a CurseForge API token.
 
 ## What a live test showed
 
@@ -58,3 +67,7 @@ On 2026-11-06 the addon ran in the Forever client 1.60.1 on a hunter with a boar
 - The squeal is `sound/creature/boar/mwildboaraggro1.ogg` (545134). A spectrogram of the file shows a squeal. If a boar still squeals with the addon on, the source is a file that is not on the list.
 - `/bbq swap` and `/bbq charge on` have not run in a live client.
 - Server hotfixes can change the sound data, and the DB2 exports do not include them.
+
+## License
+
+MIT. See `LICENSE`.

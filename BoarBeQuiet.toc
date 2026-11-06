@@ -3,6 +3,7 @@
 ## Notes: Mutes the boar squeal and the boar and pig voice. Can play another sound when the boar pet uses Charge.
 ## Author: Tucker Alleborn
 ## Version: @project-version@
+## X-License: MIT
 ## SavedVariables: BoarBeQuietDB
 
 Core.lua
