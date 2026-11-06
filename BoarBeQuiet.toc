@@ -4,6 +4,7 @@
 ## Author: Tucker Alleborn
 ## Version: @project-version@
 ## X-License: MIT
+## X-Curse-Project-ID: 1788121
 ## SavedVariables: BoarBeQuietDB
 
 Core.lua
